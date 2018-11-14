@@ -11,8 +11,11 @@ public class ArregloSocio {
 		cargarSocio();
 	}
 	//Operaciones publicas basicas
-	public void adicionar(Socio)
-
+	public void adicionar(Socio x) {
+		socio.add(x);
+	}
+	public int tamaño() {
+		return socio.size();
 	}
 	
 
