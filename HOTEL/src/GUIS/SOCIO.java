@@ -25,10 +25,10 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtNombre;
+	private JTextField txtDni;
+	private JTextField txtApellido;
+	private JTextField txtCodigo;
 	private JTextField textField_4;
 	private JButton btnAceptar;
 	private JButton btnListar;
@@ -78,43 +78,49 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
 		contentPanel.add(lblNewLabel_2);
 		
 		lblNewLabel_3 = new JLabel("CODIGO:");
-		lblNewLabel_3.setBounds(302, 11, 58, 14);
+		lblNewLabel_3.setBounds(217, 14, 58, 14);
 		contentPanel.add(lblNewLabel_3);
 		
 		lblNewLabel_4 = new JLabel("TELEFONO:");
-		lblNewLabel_4.setBounds(302, 47, 69, 20);
+		lblNewLabel_4.setBounds(217, 50, 69, 20);
 		contentPanel.add(lblNewLabel_4);
 		
-		textField = new JTextField();
-		textField.setBounds(90, 8, 86, 20);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setEditable(false);
+		txtNombre.setBounds(90, 8, 86, 20);
+		contentPanel.add(txtNombre);
+		txtNombre.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(90, 47, 86, 20);
-		contentPanel.add(textField_1);
-		textField_1.setColumns(10);
+		txtDni = new JTextField();
+		txtDni.setEditable(false);
+		txtDni.setBounds(90, 47, 86, 20);
+		contentPanel.add(txtDni);
+		txtDni.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(90, 86, 86, 20);
-		contentPanel.add(textField_2);
-		textField_2.setColumns(10);
+		txtApellido = new JTextField();
+		txtApellido.setEditable(false);
+		txtApellido.setBounds(90, 86, 86, 20);
+		contentPanel.add(txtApellido);
+		txtApellido.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(383, 8, 86, 20);
-		contentPanel.add(textField_3);
-		textField_3.setColumns(10);
+		txtCodigo = new JTextField();
+		txtCodigo.setEditable(false);
+		txtCodigo.setBounds(298, 11, 86, 20);
+		contentPanel.add(txtCodigo);
+		txtCodigo.setColumns(10);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(381, 47, 86, 20);
+		textField_4.setEditable(false);
+		textField_4.setBounds(296, 50, 86, 20);
 		contentPanel.add(textField_4);
 		textField_4.setColumns(10);
 		
 		btnAceptar = new JButton("ACEPTAR");
-		btnAceptar.setBounds(380, 86, 89, 23);
+		btnAceptar.setBounds(295, 89, 89, 23);
 		contentPanel.add(btnAceptar);
 		
-		btnListar = new JButton("LISTAR");
+		btnListar = new JButton("ADICIONAR");
+		btnListar.addActionListener(this);
 		btnListar.setBounds(559, 7, 111, 28);
 		contentPanel.add(btnListar);
 		
@@ -145,6 +151,9 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
 		contentPanel.add(label);
 	}
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnListar) {
+			actionPerformedBtnListar(arg0);
+		}
 		if (arg0.getSource() == btnConsultar) {
 			actionPerformedButton(arg0);
 		}
@@ -166,6 +175,8 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
 	}
 	protected void mouseClickedLabel(MouseEvent e) 
 	{  dispose();
+	}
+	protected void actionPerformedBtnListar(ActionEvent arg0) {
 	}
 }
 /*Arturo Xulls*/
