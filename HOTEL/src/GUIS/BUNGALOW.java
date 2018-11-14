@@ -14,13 +14,18 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
 
 public class BUNGALOW extends JDialog implements MouseListener {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtNumeroBungalow;
 	private JLabel lblX;
+	private JLabel lblCategoria;
+	private JComboBox CBOESTADO;
+	private JComboBox CBOCATEGORIA;
+	private JLabel lblPrecio;
+	private JTextField TXTPRECIO;
 
 	/**
 	 * Launch the application.
@@ -57,16 +62,10 @@ public class BUNGALOW extends JDialog implements MouseListener {
 			contentPanel.add(lblNewLabel_1);
 		}
 		{
-			textField = new JTextField();
-			textField.setBounds(95, 11, 86, 20);
-			contentPanel.add(textField);
-			textField.setColumns(10);
-		}
-		{
-			textField_1 = new JTextField();
-			textField_1.setBounds(95, 45, 86, 20);
-			contentPanel.add(textField_1);
-			textField_1.setColumns(10);
+		     txtNumeroBungalow = new JTextField();
+			txtNumeroBungalow.setBounds(95, 11, 86, 20);
+			contentPanel.add(txtNumeroBungalow);
+			txtNumeroBungalow.setColumns(10);
 		}
 		{
 			JButton btnAceptar = new JButton("ACEPTAR");
@@ -109,6 +108,27 @@ public class BUNGALOW extends JDialog implements MouseListener {
 			lblX.setBounds(663, 14, 27, 31);
 			contentPanel.add(lblX);
 		}
+		
+		lblCategoria = new JLabel("CATEGORIA: ");
+		lblCategoria.setBounds(24, 77, 66, 21);
+		contentPanel.add(lblCategoria);
+		
+		CBOESTADO = new JComboBox();
+		CBOESTADO.setBounds(95, 45, 89, 23);
+		contentPanel.add(CBOESTADO);
+		
+		CBOCATEGORIA = new JComboBox();
+		CBOCATEGORIA.setBounds(95, 77, 89, 21);
+		contentPanel.add(CBOCATEGORIA);
+		
+		lblPrecio = new JLabel("PRECIO: ");
+		lblPrecio.setBounds(29, 108, 56, 25);
+		contentPanel.add(lblPrecio);
+		
+		TXTPRECIO = new JTextField();
+		TXTPRECIO.setBounds(95, 109, 86, 20);
+		contentPanel.add(TXTPRECIO);
+		TXTPRECIO.setColumns(10);
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
