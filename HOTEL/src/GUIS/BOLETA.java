@@ -96,7 +96,7 @@ public class BOLETA extends JFrame implements ActionListener {
 	private JButton btnCerrar;
 
 	/**
-	 * Launch the application. FTGYHUJK
+	 * Launch the application. FTGYHUJK arturo
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
