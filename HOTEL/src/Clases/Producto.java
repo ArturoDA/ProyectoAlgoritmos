@@ -13,6 +13,6 @@ public class Producto {
 	this.detalle = detalle;
 	
 	/*hola que hace*/
-	
+	/*sexo*/
 	}
 }
