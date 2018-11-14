@@ -168,3 +168,4 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
 	{  dispose();
 	}
 }
+/*Arturo Xulls*/
