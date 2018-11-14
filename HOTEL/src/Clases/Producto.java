@@ -12,6 +12,7 @@ public class Producto {
 	this.stock = stock;
 	this.detalle = detalle;
 	
+	/*hola que hace*/
 	
 	}
 }
