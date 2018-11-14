@@ -22,7 +22,7 @@ public class BOLETA extends JFrame implements ActionListener {
 	private JButton btnCerrar;
 
 	/**
-	 * Launch the application.i8778u9
+	 * Launch the application.i8778u9 UJIKO
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
