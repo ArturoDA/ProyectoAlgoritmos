@@ -1,5 +1,7 @@
 package Arreglos;
+import java.util.ArrayList;
 
+import Clases.Socio;
 public class ArregloSocio {
 	//Atributos privados
 		private ArrayList<Socio> socio;
