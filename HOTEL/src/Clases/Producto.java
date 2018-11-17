@@ -4,7 +4,7 @@ public class Producto {
 	private int    stock;
 	private String detalle,codigoProducto;
 	private double precioUnitario;
-	/*constructor*/
+	/*constructor ps*/
 	public Producto(String cP,String d,int s,double pU) 
 	{
 		codigoProducto = cP;
