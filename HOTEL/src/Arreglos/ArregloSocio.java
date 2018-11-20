@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import Clases.Socio;
+import java.io.IOException;
 public class ArregloSocio {
 	//Atributos privados
 		private ArrayList<Socio> socio;
@@ -80,7 +81,7 @@ public class ArregloSocio {
 	//Operaciones publicas complementarias
 		public int codigoCorrelativo() {
 			if (tamaño() == 0)
-				return 20001;
+				return 10001;
 			else {
 				int ultimoCodigo = obtener(tamaño()-1).getCodigoSocio();
 				return ultimoCodigo + 1;

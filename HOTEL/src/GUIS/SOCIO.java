@@ -3,6 +3,9 @@ package GUIS;
 import java.awt.BorderLayout;
 
 import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -22,13 +25,25 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+
 import Arreglos.ArregloSocio;
+import Clases.Bungalow;
 import Clases.Socio;
 
 import java.awt.Color;
 
 public class SOCIO extends JDialog implements ActionListener, MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -126,6 +141,7 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
 		txtTelefono.setColumns(10);
 		
 		btnAceptar = new JButton("ACEPTAR");
+		btnAceptar.addActionListener(this);
 		btnAceptar.setForeground(Color.BLACK);
 		btnAceptar.setBounds(295, 89, 89, 23);
 		contentPanel.add(btnAceptar);
@@ -165,11 +181,9 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
         modelo.addColumn("DNI");
         tblSocio.setModel(modelo);
  
- 
- 
-        modelo.setRowCount(0);
-        Object[] fila = { 10, 20, 30, 40, 50 };
-        modelo.addRow(fila);
+        //modelo.setRowCount(0);
+        //Object[] fila = { 10, 20, 30, 40, 50 };
+        //modelo.addRow(fila);
 
         habilitarEntradas(false);
         ajustarAnchoColumnas();
@@ -179,7 +193,7 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
 	//Declaración global
 	ArregloSocio as = new ArregloSocio();
 	
-	public void actionPerformed(ActionEvent arg0) {
+	/*public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnAdicionar) {
 			actionPerformedBtnListar(arg0);
 		}
@@ -188,8 +202,168 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
 		if (e.getSource() == label) {
 			mouseClickedLabel(e);
 		}
+	}*/
+	
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnAceptar) {
+			actionPerformedBtnAceptar(arg0);
+		}
+		if (arg0.getSource() == btnEliminar) {
+			actionPerformedBtnEliminar(arg0);
+		}
+		if (arg0.getSource() == btnModificar) {
+			actionPerformedBtnModificar(arg0);
+		}
+		if (arg0.getSource() == btnAdicionar) {
+			actionPerformedBtnAdicionar(arg0);
+		}
 	}
-	public void mouseEntered(MouseEvent e) {
+	
+	/*public void mouseExited(MouseEvent e) {
+	}
+	public void mousePressed(MouseEvent e) {
+	}
+	public void mouseReleased(MouseEvent e) {
+	}
+	protected void mouseClickedTblSocio(MouseEvent arg0) {
+		habilitarEntradas(false);
+		habilitarBotones(true);
+		editarFila();
+	}*/
+	
+	protected void actionPerformedBtnAdicionar(ActionEvent arg0) {
+		btnAdicionar.setEnabled(false);
+		btnModificar.setEnabled(true);
+		btnAceptar.setEnabled(true);
+		limpieza();
+		habilitarEntradas(true);
+		txtNombre.requestFocus();
+	}
+	protected void actionPerformedBtnModificar(ActionEvent arg0) {
+		btnAdicionar.setEnabled(true);
+		btnModificar.setEnabled(false);
+		if (as.tamaño() == 0) {
+			btnAceptar.setEnabled(false);
+			habilitarEntradas(false);
+			mensaje("No existen socios");	
+		}
+		else {
+			editarFila();
+			btnAceptar.setEnabled(true);
+			habilitarEntradas(true);
+			txtNombre.requestFocus();
+		}
+	}
+	
+	
+	
+	//boton.setEnabled(true) habilita el boton segun la condicion if indicada mas abajo
+	//boton.setEnabled(false) lo desabilita
+	protected void actionPerformedBtnEliminar(ActionEvent arg0) {
+		btnAdicionar.setEnabled(true);
+		btnModificar.setEnabled(true);
+		btnAceptar.setEnabled(false);
+		if (as.tamaño() == 0)
+			mensaje("No existen socios");
+		else {
+			int numeroSocio= leerCodigoSocio();
+		Socio x =as.buscar(numeroSocio);
+		if (x.getCodigoSocio()==0) {
+			int ok = confirmar("¿ Desea eliminar el registro ?");
+			if (ok == 0) {
+				as.eliminar(as.buscar(leerCodigoSocio()));
+				as.grabarSocio();
+				listar();
+				editarFila();
+			}
+		}
+		else 
+			mensaje("No se puede eliminar el numero de Socio" + numeroSocio);
+		}
+	}
+	
+	protected void actionPerformedBtnAceptar(ActionEvent arg0) {
+		int codigoSocio = leerCodigoSocio();
+		String nombres = leerNombres();
+		String apellidos = leerApellidos();
+		String telefono = leerTelefono();
+		String dni = leerDni();
+		if ( btnAdicionar.isEnabled()== false) {
+			Socio nuevo = new Socio(codigoSocio, nombres, apellidos, dni, telefono);
+			as.adicionar(nuevo);
+			as.grabarSocio();;
+			btnAdicionar.setEnabled(true);
+			}
+		if(btnModificar.isEnabled()==false) {
+			Socio p = as.buscar(codigoSocio);
+			p.setNombres(nombres);
+			p.setApellidos(apellidos);
+			p.setTelefono(telefono);
+			p.setDni(dni);
+			as.grabarSocio();
+			btnModificar.setEnabled(true);
+		}
+		listar();
+		habilitarEntradas(false);
+	}
+	
+	
+	/*protected void actionPerformedBtnAceptar(ActionEvent arg0) {
+		int codigoSocio = leerCodigoSocio();
+		String nombres = leerNombres();
+		if (nombres.length() > 0) {
+			String apellidos = leerApellidos();
+			if (apellidos.length() > 0) {
+				String telefono = leerTelefono();
+				if (telefono.length() > 0) {
+					String dni = leerDni();
+					if (dni.length() > 0) {
+						if (btnAdicionar.isEnabled() == false) {
+							Socio nuevo = new Socio(codigoSocio, nombres, apellidos, dni, telefono);
+							as.adicionar(nuevo);
+							as.grabarSocio();;
+							btnAdicionar.setEnabled(true);
+						}
+						if (btnModificar.isEnabled() == false) {
+							Socio p = as.buscar(codigoSocio);
+							p.setNombres(nombres);
+							p.setApellidos(apellidos);
+							p.setTelefono(telefono);
+							p.setDni(dni);
+							as.grabarSocio();
+							btnModificar.setEnabled(true);
+						}
+						listar();
+						habilitarEntradas(false);
+					}
+					else
+						error("Ingrese DNI correcto", txtDni);
+				}
+				else
+					error("Ingrese TELÉFONO correcto", txtTelefono);		
+			}
+			else
+				error("ingrese APELLIDOS correctos", txtApellido);
+		}
+		else
+			error("ingrese NOMBRES correctos", txtNombre);		
+	}*/
+	
+
+	public void keyPressed(KeyEvent arg0) {
+	}
+	public void keyReleased(KeyEvent arg0) {
+		arg0.consume();
+		editarFila();		
+	}
+	public void keyTyped(KeyEvent arg0) {
+	}
+	public void mouseClicked(MouseEvent arg0) {
+		if (arg0.getSource() == tblSocio) {
+			mouseClickedTblPaciente(arg0);
+		}
+	}
+	public void mouseEntered(MouseEvent arg0) {
 		if (arg0.getSource() == btnAceptar) {
 			mouseEnteredBtnAceptar(arg0);
 		}
@@ -203,18 +377,17 @@ public class SOCIO extends JDialog implements ActionListener, MouseListener {
 			mouseEnteredBtnAdicionar(arg0);
 		}
 	}
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(MouseEvent arg0) {
 	}
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent arg0) {
 	}
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(MouseEvent arg0) {
 	}
-	protected void mouseClickedTblSocio(MouseEvent arg0) {
+	protected void mouseClickedTblPaciente(MouseEvent arg0) {
 		habilitarEntradas(false);
 		habilitarBotones(true);
 		editarFila();
 	}
-	
 	
 	protected void mouseEnteredBtnAdicionar(MouseEvent arg0) {
 		btnAdicionar.setCursor(new Cursor(Cursor.HAND_CURSOR));

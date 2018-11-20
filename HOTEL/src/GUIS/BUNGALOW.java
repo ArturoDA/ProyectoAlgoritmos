@@ -305,6 +305,8 @@ public class BUNGALOW extends JDialog implements MouseListener, ActionListener, 
 		mensaje("No se puede eliminar el numero de Bungalow" + numeroBungalow+ "porque esta ocupado");
 	}
 	}
+	
+	
 	protected void actionPerformedBtnConsultar(ActionEvent arg0) {
 	}
 	protected void actionPerformedBtnNewButton(ActionEvent arg0) {
