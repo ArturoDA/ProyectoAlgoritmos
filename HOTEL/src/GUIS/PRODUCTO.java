@@ -16,6 +16,8 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class PRODUCTO extends JDialog implements ActionListener, MouseListener {
 
@@ -26,6 +28,22 @@ public class PRODUCTO extends JDialog implements ActionListener, MouseListener {
 	private JTextField textField_3;
 	private JButton btnNewButton_1;
 	private JLabel label;
+	private JTable tblProducto;
+	private DefaultTableModel modelo;
+	
+	  modelo = new DefaultTableModel();
+      modelo.addColumn("Lunes");
+      modelo.addColumn("Martes");
+      modelo.addColumn("Miércoles");
+      modelo.addColumn("Jueves");
+      modelo.addColumn("Viernes");
+      tblTabla.setModel(modelo);
+
+
+
+      modelo.setRowCount(0);
+      Object[] fila = { 10, 20, 30, 40, 50 };
+      modelo.addRow(fila);
 
 	/**
 	 * Launch the application.
@@ -44,6 +62,11 @@ public class PRODUCTO extends JDialog implements ActionListener, MouseListener {
 	 * Create the dialog.
 	 */
 	public PRODUCTO() {
+		setResizable(false);
+		setTitle("Mantenimiento | Medicina");
+		setBounds(100, 100, 700, 400);
+		getContentPane().setLayout(null);
+		
 		setUndecorated(true);
 		setBounds(100, 100, 718, 473);
 		getContentPane().setLayout(new BorderLayout());
@@ -122,20 +145,21 @@ public class PRODUCTO extends JDialog implements ActionListener, MouseListener {
 			contentPanel.add(btnEliminar);
 		}
 		{
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 144, 682, 279);
-			contentPanel.add(scrollPane);
-			{
-				JTextArea textArea = new JTextArea();
-				scrollPane.setViewportView(textArea);
-			}
-		}
-		{
 			label = new JLabel("X");
 			label.addMouseListener(this);
 			label.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			label.setBounds(689, 0, 19, 29);
 			contentPanel.add(label);
+		}
+		{
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(12, 152, 671, 294);
+			contentPanel.add(scrollPane);
+			{
+				tblProducto = new JTable();
+				tblProducto.setFillsViewportHeight(true);
+				scrollPane.setViewportView(tblProducto);
+			}
 		}
 	}
 

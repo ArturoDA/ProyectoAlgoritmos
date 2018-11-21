@@ -1,32 +1,43 @@
 package Clases;
 
 public class Producto {
-	private int    stock;
-	private String detalle,codigoProducto;
+	private int    stock, codigoProducto;
+	private String detalle;
 	private double precioUnitario;
 	/*constructor ps*/
-	public Producto(String cP,String d,int s,double pU) 
-	{
-		codigoProducto = cP;
-		detalle = d;
-		stock = s;
-		precioUnitario = pU;
+	public Producto(int stock, int codigoProducto, String detalle, double precioUnitario) {
+		this.stock = stock;
+		this.codigoProducto = codigoProducto;
+		this.detalle = detalle;
+		this.precioUnitario = precioUnitario;
+	}
+	//getters and setters
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public int getCodigoProducto() {
+		return codigoProducto;
+	}
+	public void setCodigoProducto(int codigoProducto) {
+		this.codigoProducto = codigoProducto;
+	}
+	public String getDetalle() {
+		return detalle;
+	}
+	public void setDetalle(String detalle) {
+		this.detalle = detalle;
+	}
+	public double getPrecioUnitario() {
+		return precioUnitario;
+	}
+	public void setPrecioUnitario(double precioUnitario) {
+		this.precioUnitario = precioUnitario;
 	}
 	
+
+
 	
-	/*Objetos
-	Producto habitacion = new Producto();
-	Producto servicioHabitacion = new Producto();
-	Producto consumoComestible = new Producto();
-	Producto consumoEntrenimiento = new Producto();
-	*/
-	/*metodos*/
-	
-	public Producto() {
-	this.codigoProducto = codigoProducto;
-	this.stock = stock;
-	this.detalle = detalle;
-	
-	
-	}
 }
